@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your Logged Moods</h1>
+<ul style="list-style-type: none; padding: 0;">
+  {% for mood in moods %}
+    <li style="margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
+      <strong>{{ mood.timestamp }}</strong> - <strong>{{ mood.mood }}</strong>: {{ mood.description }}
+    </li>
+  {% empty %}
+    <li>No moods logged yet.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'log_mood' %}" style="text-decoration: none; color: #fff; background-color: #4CAF50; padding: 10px 15px; border-radius: 5px; display: inline-block; margin-top: 20px;">
+  Log a new mood
+</a>
+{% endblock %}

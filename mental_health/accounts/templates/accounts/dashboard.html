@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f7f4; /* Soft beige */
+            color: #333; /* Dark gray */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #5a8f7b; /* Calm green */
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            color: #5a8f7b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #5a8f7b;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #f2f2f2; /* Light gray */
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{ request.user.username }}!</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'mood_tracker' %}">Mood Tracker</a></li>
+                <li><a href="{% url 'profile_view' %}">View Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Your Mood Entries</h2>
+            <ul>
+                {% for mood in moods %}
+                    <li>
+                        <strong>Date:</strong> {{ mood.timestamp }} <br>
+                        <strong>Mood:</strong> {{ mood.mood }} <br>
+                        <strong>Notes:</strong> {{ mood.description }}
+                    </li>
+                {% empty %}
+                    <p>No mood entries found.</p>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h2>Mood Insights</h2>
+            <p>{{ insights }}</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mental Health AI Tool</p>
+    </footer>
+</body>
+</html>
