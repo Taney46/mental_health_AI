@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect 
 from .models import MoodEntry
 from .forms import MoodEntryForm
 from django.contrib.auth.decorators import login_required
@@ -6,7 +6,8 @@ from django.http import JsonResponse, HttpResponse
 from textblob import TextBlob
 
 def home(request):
-    return HttpResponse("Mental Health AI Tool is running!")
+    return render(request, 'tracker/home.html')
+
 
 @login_required
 def mood_tracker(request):
@@ -17,8 +18,6 @@ def mood_tracker(request):
             mood_entry.user = request.user
             if mood_entry.description:
                 mood_entry.sentiment = analyze_sentiment(mood_entry.description)
-            else:
-                mood_entry.sentiment = 'neutral'  # Set default sentiment if no description
             mood_entry.save()
             return redirect('mood_tracker')
     else:
@@ -26,7 +25,6 @@ def mood_tracker(request):
     
     moods = MoodEntry.objects.filter(user=request.user).order_by('-timestamp')
     return render(request, 'tracker/mood_tracker.html', {'form': form, 'moods': moods})
-
 
 
 @login_required
@@ -54,7 +52,3 @@ def analyze_sentiment(text):
         return 'negative'
     else:
         return 'neutral'
-    
-    
-
-

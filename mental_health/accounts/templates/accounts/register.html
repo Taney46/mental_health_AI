@@ -7,8 +7,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f7f4; /* A soft beige for a warm background */
-            color: #333; /* Dark gray for readable text */
+            background-color: #f9f7f4; /* Soft beige background */
+            color: #333; /* Dark gray for text */
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,25 +17,42 @@
             height: 100vh;
         }
         .container {
-            background-color: #ffffff;
-            border-radius: 2px;
+            background-color: #ffffff; /* White card background */
+            border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            width: 80%;
-            max-width: 900px;
+            padding: 30px 20px; /* Increased padding for breathing space */
+            width: 100%;
+            max-width: 400px; /* Constrained width for better fitting */
         }
         h1 {
             text-align: center;
-            color: #5a8f7b; /* A calm green for the header */
+            color: #5a8f7b; /* Muted green for headings */
+            margin-bottom: 20px; /* Space below the title */
         }
         form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px; /* Space between form elements */
+        }
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #5a8f7b;
+        }
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+        }
+        input:focus {
+            border-color: #5a8f7b; /* Highlight on focus */
+            box-shadow: 0 0 5px rgba(90, 143, 123, 0.5);
         }
         button {
-            background-color: #5a8f7b;
-            color: #ffffff;
+            background-color: #5a8f7b; /* Green button */
+            color: #ffffff; /* White text */
             padding: 10px;
             border: none;
             border-radius: 5px;
@@ -43,7 +60,11 @@
             font-size: 16px;
         }
         button:hover {
-            background-color: #4e7d6e;
+            background-color: #4e7d6e; /* Slightly darker green on hover */
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
         }
     </style>
 </head>
@@ -52,7 +73,15 @@
         <h1>Register</h1>
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <small style="color: red;">{{ field.errors|striptags }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
             <button type="submit">Register</button>
         </form>
     </div>

@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Mental Health AI</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #5a8f7b;
+            color: #fff;
+            padding: 20px 10px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        main h2 {
+            color: #5a8f7b;
+        }
+        .visuals img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        footer {
+            background-color: #5a8f7b;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Mental Health AI</h1>
+        <nav>
+            <ul>
+                
+                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'mood_data' %}">Mood Data</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Your Mental Health Journey</h2>
+            <p>Welcome to the platform where you can track and manage your mental well-being.</p>
+            <p>Start by logging your mood and see your progress over time.</p>
+        </section>
+        <div class="visuals">
+            <img src="C:\Users\plp_academy\mental_health_AI\mental_health\tracker\templates\tracker\mental_health.jpg" alt="Mental health illustration">
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Mental Health AI. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

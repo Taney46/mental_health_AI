@@ -1,7 +1,10 @@
-from django.db import models
+from django.db import models 
 from django.contrib.auth.models import User
 
 class MoodEntry(models.Model):
+    """
+    Model to store individual mood entries for users.
+    """
     MOOD_CHOICES = [
         ('happy', 'Happy'),
         ('neutral', 'Neutral'),
@@ -9,7 +12,7 @@ class MoodEntry(models.Model):
         ('angry', 'Angry'),
         ('excited', 'Excited'),
         ('anxious', 'Anxious'),
-        # Add more moods if needed
+        # Add more moods as needed
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='mood_entries')
@@ -20,3 +23,4 @@ class MoodEntry(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.mood} ({self.timestamp.strftime('%Y-%m-%d %H:%M:%S')})"
+                                                    
